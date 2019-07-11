@@ -108,7 +108,7 @@ class Leaderboard extends Component {
   componentWillMount() {
     console.log(this.props.tournament.id);
     this.state.isLoading = true;
-    fetch(`http://localhost:3001/leaderboard/${this.props.tournament.id}`)
+    fetch(`http://52.37.61.234:3004/leaderboard/${this.props.tournament.id}`)
       .then(response => response.json())
       .then(data => {
         console.log(data);

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, Container } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 class SelectionPage extends Component {
   state = {
@@ -23,23 +23,23 @@ class SelectionPage extends Component {
     // ],
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
-    console.log(event.target.elements.formBasicEmail.value)
-    console.log(event.target.elements.formFirstName.value)
-    console.log(event.target.elements.formLastName.value)
-    console.log(event.target.elements.formTier1Player.value)
-    console.log(event.target.elements.formTier3Player.value)
-    console.log(event.target.elements.formTier4Player.value)
-    console.log(event.target.elements.formTier2Player[0].value)
-    console.log(event.target.elements.formTier2Player[1].value)
-    console.log(this.props.tournament.id)
+    console.log(event.target.elements.formBasicEmail.value);
+    console.log(event.target.elements.formFirstName.value);
+    console.log(event.target.elements.formLastName.value);
+    console.log(event.target.elements.formTier1Player.value);
+    console.log(event.target.elements.formTier3Player.value);
+    console.log(event.target.elements.formTier4Player.value);
+    console.log(event.target.elements.formTier2Player[0].value);
+    console.log(event.target.elements.formTier2Player[1].value);
+    console.log(this.props.tournament.id);
     // @TODO make call to api to save selections in db then redirect to leaderboard for that tournament
-    this.props.history.push('/leaderboard')
+    this.props.history.push("/leaderboard");
   };
 
   componentWillMount() {
-    fetch(`http://localhost:3001/tournament-field/${this.props.tournament.id}`)
+    fetch(`http://52.37.61.234:3004/tournament-field/${this.props.tournament.id}`)
       .then(response => response.json())
       .then(data => {
         console.log(data);
@@ -109,7 +109,11 @@ class SelectionPage extends Component {
             <Form.Label>Select One Tier 1 Player</Form.Label>
             <Form.Control as="select">
               {this.state.tierOne.map(player => {
-                return <option key={player.value} value={player.value}>{player.label}</option>;
+                return (
+                  <option key={player.value} value={player.value}>
+                    {player.label}
+                  </option>
+                );
               })}
             </Form.Control>
           </Form.Group>
@@ -117,12 +121,20 @@ class SelectionPage extends Component {
             <Form.Label>Select Two Tier 2 Player</Form.Label>
             <Form.Control as="select">
               {this.state.tierTwo.map(player => {
-                return <option key={player.value} value={player.value}>{player.label}</option>;
+                return (
+                  <option key={player.value} value={player.value}>
+                    {player.label}
+                  </option>
+                );
               })}
             </Form.Control>
             <Form.Control as="select">
               {this.state.tierTwo.map(player => {
-                return <option key={player.value} value={player.value}>{player.label}</option>;
+                return (
+                  <option key={player.value} value={player.value}>
+                    {player.label}
+                  </option>
+                );
               })}
             </Form.Control>
           </Form.Group>
@@ -130,7 +142,11 @@ class SelectionPage extends Component {
             <Form.Label>Select One Tier 3 Player</Form.Label>
             <Form.Control as="select">
               {this.state.tierThree.map(player => {
-                return <option key={player.value} value={player.value}>{player.label}</option>;
+                return (
+                  <option key={player.value} value={player.value}>
+                    {player.label}
+                  </option>
+                );
               })}
             </Form.Control>
           </Form.Group>
@@ -138,7 +154,11 @@ class SelectionPage extends Component {
             <Form.Label>Select One Tier 4 Player</Form.Label>
             <Form.Control as="select">
               {this.state.tierFour.map(player => {
-                return <option key={player.value} value={player.value}>{player.label}</option>;
+                return (
+                  <option key={player.value} value={player.value}>
+                    {player.label}
+                  </option>
+                );
               })}
             </Form.Control>
           </Form.Group>

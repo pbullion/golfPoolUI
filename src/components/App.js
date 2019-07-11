@@ -8,11 +8,11 @@ import Schedule from "./Schedule";
 class App extends Component {
   render() {
     return (
-        <Router>
-          <Route path="/" exact component={Schedule} />
-          <Route path="/selection-page" component={SelectionPage} />
-          <Route path="/leaderboard" component={Leaderboard} />
-        </Router>
+      <Router>
+        <Route path="/" exact component={Schedule} />
+        <Route path="/selection-page" component={SelectionPage} />
+        <Route path="/leaderboard" component={Leaderboard} />
+      </Router>
     );
   }
 }
