@@ -4,6 +4,6 @@ import {MyContext} from "../../contexts/MyContext";
 
 export default () => (
     <MyContext.Consumer>
-        {() => <Leaderboard />}
+        {({tournament}) => <Leaderboard tournament={tournament} />}
     </MyContext.Consumer>
 )

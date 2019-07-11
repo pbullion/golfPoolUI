@@ -1,9 +1,9 @@
 import React from 'react';
-import SelectionPage from './SelectionPage';
+import Schedule from './Schedule';
 import {MyContext} from "../../contexts/MyContext";
 
 export default () => (
     <MyContext.Consumer>
-        {({tournament}) => <SelectionPage tournament={tournament} />}
+        {({tournament, selectTournament}) => <Schedule tournament={tournament} selectTournament={selectTournament} />}
     </MyContext.Consumer>
 )

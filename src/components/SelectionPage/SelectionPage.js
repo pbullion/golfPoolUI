@@ -1,51 +1,50 @@
 import React, { Component } from "react";
-import Select from "react-select";
 import { Button, Container } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
+import {withRouter} from "react-router-dom";
 
 class SelectionPage extends Component {
   state = {
-    tierOne: [],
-    tierTwo: [],
-    tierThree: [],
-    tierFour: []
+    // tierOne: [
+    //   { value: "848390292302039", label: "Patrick Bullion" },
+    //   { value: "23490578389047589023475", label: "Doug Sartin" }
+    // ],
+    // tierTwo: [
+    //   { value: "one", label: "Patrick Bullion" },
+    //   { value: "two", label: "Doug Sartin" }
+    // ],
+    // tierThree: [
+    //   { value: "848390292302039", label: "Patrick Bullion" },
+    //   { value: "23490578389047589023475", label: "Doug Sartin" }
+    // ],
+    // tierFour: [
+    //   { value: "848390292302039", label: "Patrick Bullion" },
+    //   { value: "23490578389047589023475", label: "Doug Sartin" }
+    // ],
   };
 
-  handleChangeTier1 = selectedTier1 => {
-    this.setState({ selectedTier1: selectedTier1 });
-    console.log(`Option selected:`, selectedTier1);
-  };
-
-  handleChangeTier2a = selectedTier2a => {
-    this.setState({ selectedTier2a: selectedTier2a });
-    console.log(`Option selected:`, selectedTier2a);
-  };
-
-  handleChangeTier2b = selectedTier2b => {
-    this.setState({ selectedTier2b: selectedTier2b });
-    console.log(`Option selected:`, selectedTier2b);
-  };
-
-  handleChangeTier3 = selectedTier3 => {
-    this.setState({ selectedTier3: selectedTier3 });
-    console.log(`Option selected:`, selectedTier3);
-  };
-
-  handleChangeTier4 = selectedTier4 => {
-    this.setState({ selectedTier4: selectedTier4 });
-    console.log(`Option selected:`, selectedTier4);
-  };
-
-  handleSubmit = () => {
-    alert(
-      `You have selected: ${this.state.selectedTier1.label}, ${this.state.selectedTier2a.label}, ${this.state.selectedTier2b.label}, ${this.state.selectedTier3.label}, ${this.state.selectedTier4.label}`
-    );
+  handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(event.target.elements.formBasicEmail.value)
+    console.log(event.target.elements.formFirstName.value)
+    console.log(event.target.elements.formLastName.value)
+    console.log(event.target.elements.formTier1Player.value)
+    console.log(event.target.elements.formTier3Player.value)
+    console.log(event.target.elements.formTier4Player.value)
+    console.log(event.target.elements.formTier2Player[0].value)
+    console.log(event.target.elements.formTier2Player[1].value)
+    console.log(this.props.tournament.id)
+    // @TODO make call to api to save selections in db then redirect to leaderboard for that tournament
+    this.props.history.push('/leaderboard')
   };
 
   componentWillMount() {
-    fetch("http://localhost:3001/wgr")
+    fetch(`http://localhost:3001/tournament-field/${this.props.tournament.id}`)
       .then(response => response.json())
       .then(data => {
+        console.log(data);
         for (let i = 0; i < data.players.length; i++) {
+          console.log(data.players);
           if (data.players[i].rank <= 10) {
             console.log(data.players[i].rank);
             this.state.tierOne.push({
@@ -68,7 +67,7 @@ class SelectionPage extends Component {
                 data.players[i].first_name + " " + data.players[i].last_name
             });
           }
-          if (data.players[i].rank >= 51) {
+          if (data.players[i].rank >= 51 || !data.players[i].rank) {
             this.state.tierFour.push({
               value: data.players[i].id,
               label:
@@ -78,6 +77,8 @@ class SelectionPage extends Component {
         }
       });
     console.log(this.state.tierOne);
+    console.log(this.state.tierTwo);
+    console.log(this.state.tier4);
   }
 
   render() {
@@ -90,44 +91,64 @@ class SelectionPage extends Component {
           justifyContent: "center"
         }}
       >
-        <div style={{ width: 500, marginBottom: 20 }}>
-          <h1>Select One Tier 1 Player</h1>
-          <Select
-            onChange={this.handleChangeTier1}
-            options={this.state.tierOne}
-          />
-        </div>
-        <div style={{ width: 500, marginBottom: 20 }}>
-          <h1>Select Two Tier 2 Player</h1>
-          <Select
-            onChange={this.handleChangeTier2a}
-            options={this.state.tierTwo}
-          />
-          <Select
-            onChange={this.handleChangeTier2b}
-            options={this.state.tierTwo}
-          />
-        </div>
-        <div style={{ width: 500, marginBottom: 20 }}>
-          <h1>Select One Tier 3 Player</h1>
-          <Select
-            onChange={this.handleChangeTier3}
-            options={this.state.tierThree}
-          />
-        </div>
-        <div style={{ width: 500, marginBottom: 20 }}>
-          <h1>Select One Tier 4 Player</h1>
-          <Select
-            onChange={this.handleChangeTier4}
-            options={this.state.tierFour}
-          />
-        </div>
-        <Button size="lg" variant="success" onClick={this.handleSubmit}>
-          Submit
-        </Button>
+        <h1>{this.props.tournament.name && this.props.tournament.name}</h1>
+        <Form onSubmit={e => this.handleSubmit(e)}>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control type="email" placeholder="Enter email" />
+          </Form.Group>
+          <Form.Group controlId="formFirstName">
+            <Form.Label>First Name</Form.Label>
+            <Form.Control placeholder="First Name" />
+          </Form.Group>
+          <Form.Group controlId="formLastName">
+            <Form.Label>Last Name</Form.Label>
+            <Form.Control placeholder="Last Name" />
+          </Form.Group>
+          <Form.Group controlId="formTier1Player">
+            <Form.Label>Select One Tier 1 Player</Form.Label>
+            <Form.Control as="select">
+              {this.state.tierOne.map(player => {
+                return <option key={player.value} value={player.value}>{player.label}</option>;
+              })}
+            </Form.Control>
+          </Form.Group>
+          <Form.Group controlId="formTier2Player">
+            <Form.Label>Select Two Tier 2 Player</Form.Label>
+            <Form.Control as="select">
+              {this.state.tierTwo.map(player => {
+                return <option key={player.value} value={player.value}>{player.label}</option>;
+              })}
+            </Form.Control>
+            <Form.Control as="select">
+              {this.state.tierTwo.map(player => {
+                return <option key={player.value} value={player.value}>{player.label}</option>;
+              })}
+            </Form.Control>
+          </Form.Group>
+          <Form.Group controlId="formTier3Player">
+            <Form.Label>Select One Tier 3 Player</Form.Label>
+            <Form.Control as="select">
+              {this.state.tierThree.map(player => {
+                return <option key={player.value} value={player.value}>{player.label}</option>;
+              })}
+            </Form.Control>
+          </Form.Group>
+          <Form.Group controlId="formTier4Player">
+            <Form.Label>Select One Tier 4 Player</Form.Label>
+            <Form.Control as="select">
+              {this.state.tierFour.map(player => {
+                return <option key={player.value} value={player.value}>{player.label}</option>;
+              })}
+            </Form.Control>
+          </Form.Group>
+          <Button size="lg" variant="success" type="submit">
+            Submit
+          </Button>
+        </Form>
       </Container>
     );
   }
 }
 
-export default SelectionPage;
+export default withRouter(SelectionPage);
