@@ -117,6 +117,7 @@ class Leaderboard extends Component {
           <thead>
             <tr>
               <th scope="col">Name</th>
+              <th scope="col">Paid</th>
               <th scope="col">Tier 1</th>
               <th scope="col">1</th>
               <th scope="col">2</th>
@@ -147,7 +148,6 @@ class Leaderboard extends Component {
               <th scope="col">SAT</th>
               <th scope="col">SUN</th>
               <th scope="col">TOTAL</th>
-              <th scope="col">Paid</th>
             </tr>
           </thead>
           <tbody>
@@ -159,6 +159,10 @@ class Leaderboard extends Component {
                         <p>
                           {user.first_name} {user.last_name}
                         </p>
+                      </td>
+                      <td>
+                        <p>{user.paid ? <FontAwesomeIcon icon={faCheck} />
+                            : null}</p>
                       </td>
                       <td>
                         <p>{user.tier1_name}</p>
@@ -329,10 +333,6 @@ class Leaderboard extends Component {
                       </td>
                       <td>
                         <p>{user.total}</p>
-                      </td>
-                      <td>
-                        <p>{user.paid ? <FontAwesomeIcon icon={faCheck} />
-                            : null}</p>
                       </td>
                     </tr>
                   );
