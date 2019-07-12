@@ -100,13 +100,11 @@ class Leaderboard extends Component {
                 this.state.users[x].tier4Score.push({rounds: []});
               }
             }
+            // this.state.users.sort(function(a, b) {return a.total - b.total})
             this.state.isLoading = false;
             this.forceUpdate();
           });
       })
-      .then(result => {
-        // this.state.users.sort(function(a, b) {return a.total - b.total})
-      });
   }
 
   render() {
