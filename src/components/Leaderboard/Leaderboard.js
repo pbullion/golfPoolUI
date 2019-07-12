@@ -121,6 +121,11 @@ class Leaderboard extends Component {
             <tr>
               <th scope="col">Name</th>
               <th scope="col">Paid</th>
+              <th scope="col">TOTAL</th>
+              <th scope="col">THU</th>
+              <th scope="col">FRI</th>
+              <th scope="col">SAT</th>
+              <th scope="col">SUN</th>
               <th scope="col">Tier 1</th>
               <th scope="col">1</th>
               <th scope="col">2</th>
@@ -146,11 +151,6 @@ class Leaderboard extends Component {
               <th scope="col">2</th>
               <th scope="col">3</th>
               <th scope="col">4</th>
-              <th scope="col">THU</th>
-              <th scope="col">FRI</th>
-              <th scope="col">SAT</th>
-              <th scope="col">SUN</th>
-              <th scope="col">TOTAL</th>
             </tr>
           </thead>
           <tbody>
@@ -164,9 +164,27 @@ class Leaderboard extends Component {
                         </p>
                       </td>
                       <td id="fontAwesome">
-                          {user.paid ? (
-                            <FontAwesomeIcon style={{textAlign: 'center'}} icon={faCheck} />
-                          ) : null}
+                        {user.paid ? (
+                          <FontAwesomeIcon
+                            style={{ textAlign: "center" }}
+                            icon={faCheck}
+                          />
+                        ) : null}
+                      </td>
+                      <td>
+                        <p>{user.total}</p>
+                      </td>
+                      <td>
+                        <p>{user.thursdayTotal ? user.thursdayTotal : null}</p>
+                      </td>
+                      <td>
+                        <p>{user.fridayTotal ? user.fridayTotal : null}</p>
+                      </td>
+                      <td>
+                        <p>{user.saturdayTotal ? user.saturdayTotal : null}</p>
+                      </td>
+                      <td>
+                        <p>{user.sundayTotal ? user.sundayTotal : null}</p>
                       </td>
                       <td>
                         <p>{user.tier1_name}</p>
@@ -322,21 +340,6 @@ class Leaderboard extends Component {
                             ? user.tier4Score[0].rounds[3].score
                             : null}
                         </p>
-                      </td>
-                      <td>
-                        <p>{user.thursdayTotal ? user.thursdayTotal : null}</p>
-                      </td>
-                      <td>
-                        <p>{user.fridayTotal ? user.fridayTotal : null}</p>
-                      </td>
-                      <td>
-                        <p>{user.saturdayTotal ? user.saturdayTotal : null}</p>
-                      </td>
-                      <td>
-                        <p>{user.sundayTotal ? user.sundayTotal : null}</p>
-                      </td>
-                      <td>
-                        <p>{user.total}</p>
                       </td>
                     </tr>
                   );
