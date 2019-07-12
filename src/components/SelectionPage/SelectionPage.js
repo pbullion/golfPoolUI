@@ -91,7 +91,8 @@ class SelectionPage extends Component {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "center"
+          justifyContent: "center",
+          textAlign: "center"
         }}
       >
         <h1>{this.props.tournament.name && this.props.tournament.name}</h1>

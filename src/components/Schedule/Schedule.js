@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Container, Button } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 import * as season from "./tournaments.js";
+import "./Schedule.css";
 
 class Schedule extends Component {
   state = {
@@ -39,7 +40,8 @@ class Schedule extends Component {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "center"
+          justifyContent: "center",
+          textAlign: "center",
         }}
       >
         <h1>2019 PGA TOUR SCHEDULE</h1>
@@ -71,7 +73,7 @@ class Schedule extends Component {
             BONUS **If you pick the Champion, you will receive a 3-shot
             reduction upon final scoring**
           </li>
-          <li><a href="https://venmo.com/code?user_id=1761698973220865011">Venmo: jonathan-lacour, 713-376-0030</a></li>
+          <li><a href="https://venmo.com/code?user_id=1345709991264256703">Venmo: jonathan-lacour, 713-376-0030</a></li>
         </ul>
         {this.state.tournaments &&
           this.state.tournaments.map(tournament => {

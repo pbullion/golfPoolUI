@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Container } from "react-bootstrap";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import "./Leaderboard.css";
 
 class Leaderboard extends Component {
   state = {
@@ -16,7 +17,9 @@ class Leaderboard extends Component {
       .then(res => res.json())
       .then(userSelections => {
         this.state.users = userSelections;
-        fetch(`http://34.217.60.211:3004/leaderboard/${this.props.tournament.id}`)
+        fetch(
+          `http://34.217.60.211:3004/leaderboard/${this.props.tournament.id}`
+        )
           .then(response => response.json())
           .then(data => {
             console.log(data);
@@ -95,18 +98,18 @@ class Leaderboard extends Component {
                     this.state.users[x].total + this.state.users[x].sundayTotal;
                 }
               } else {
-                this.state.users[x].tier1Score.push({rounds: []});
-                this.state.users[x].tier2aScore.push({rounds: []});
-                this.state.users[x].tier2bScore.push({rounds: []});
-                this.state.users[x].tier3Score.push({rounds: []});
-                this.state.users[x].tier4Score.push({rounds: []});
+                this.state.users[x].tier1Score.push({ rounds: [] });
+                this.state.users[x].tier2aScore.push({ rounds: [] });
+                this.state.users[x].tier2bScore.push({ rounds: [] });
+                this.state.users[x].tier3Score.push({ rounds: [] });
+                this.state.users[x].tier4Score.push({ rounds: [] });
               }
             }
             // this.state.users.sort(function(a, b) {return a.total - b.total})
             this.state.isLoading = false;
             this.forceUpdate();
           });
-      })
+      });
   }
 
   render() {
@@ -160,9 +163,10 @@ class Leaderboard extends Component {
                           {user.first_name} {user.last_name}
                         </p>
                       </td>
-                      <td>
-                        <p>{user.paid ? <FontAwesomeIcon icon={faCheck} />
-                            : null}</p>
+                      <td id="fontAwesome">
+                          {user.paid ? (
+                            <FontAwesomeIcon style={{textAlign: 'center'}} icon={faCheck} />
+                          ) : null}
                       </td>
                       <td>
                         <p>{user.tier1_name}</p>
