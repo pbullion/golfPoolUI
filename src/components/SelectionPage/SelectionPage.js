@@ -149,7 +149,7 @@ class SelectionPage extends Component {
             </Form.Control>
           </Form.Group>
           <Form.Group controlId="formTier2Player">
-            <Form.Label>Select Two Tier 2 Player</Form.Label>
+            <Form.Label>Select Two Tier 2 Players</Form.Label>
             <Form.Control as="select">
               {this.state.tierTwo.map(player => {
                 return (
