@@ -31,7 +31,7 @@ class SelectionPage extends Component {
     let tier3 = this.state.golfers.find(golfer => golfer.id === event.target.elements.formTier3Player.value);
     let tier4 = this.state.golfers.find(golfer => golfer.id === event.target.elements.formTier4Player.value);
 
-    axios.post(`http://52.37.61.234:3004/user/userSelections`, {
+    axios.post(`http://34.217.60.211:3004/user/userSelections`, {
       first_name, last_name, email, tournament_id, tier1, tier2a, tier2b, tier3, tier4
     }, {
       headers: {
@@ -47,7 +47,7 @@ class SelectionPage extends Component {
   };
 
   componentWillMount() {
-    fetch(`http://52.37.61.234:3004/tournament-field/${this.props.tournament.id}`)
+    fetch(`http://34.217.60.211:3004/tournament-field/${this.props.tournament.id}`)
       .then(response => response.json())
       .then(data => {
         console.log("********************");

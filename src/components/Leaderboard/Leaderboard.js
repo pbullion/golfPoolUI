@@ -10,11 +10,11 @@ class Leaderboard extends Component {
 
   componentWillMount() {
     this.state.isLoading = true;
-    fetch(`http://52.37.61.234:3004/user/userSelections`)
+    fetch(`http://34.217.60.211:3004/user/userSelections`)
       .then(res => res.json())
       .then(userSelections => {
         this.state.users = userSelections;
-        fetch(`http://52.37.61.234:3004/leaderboard/${this.props.tournament.id}`)
+        fetch(`http://34.217.60.211:3004/leaderboard/${this.props.tournament.id}`)
           .then(response => response.json())
           .then(data => {
             console.log(data);
