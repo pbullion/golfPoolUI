@@ -4,171 +4,109 @@ import { Container } from "react-bootstrap";
 class Leaderboard extends Component {
   state = {
     isLoading: false,
-    users: [
-      {
-        first_name: "Patrick",
-        last_name: "Bullion",
-        tier1: {
-          value: "085c0b40-e456-4d46-b011-f992a4ee8a68",
-          label: "Adam Hadwin"
-        },
-        tier2a: {
-          value: "72b41f76-a9a1-4ff9-8364-b8a21129bd54",
-          label: "Scott Piercy"
-        },
-        tier2b: {
-          value: "92544280-0438-4f43-a5f3-f3a21ea55157",
-          label: "Brian Harman"
-        },
-        tier3: {
-          value: "3abaad6d-ea04-49aa-b330-aa1b450c1b36",
-          label: "Sam Saunders"
-        },
-        tier4: {
-          value: "f572509d-7c6d-48b9-9c65-a20f6d2d492b",
-          label: "Sam Burns"
-        }
-      },
-      {
-        first_name: "RJ",
-        last_name: "Turner",
-        tier1: {
-          value: "085c0b40-e456-4d46-b011-f992a4ee8a68",
-          label: "Adam Hadwin"
-        },
-        tier2a: {
-          value: "80ce67a7-fba9-482f-b7e0-9c0eb23425d4",
-          label: "Charlie Danielson"
-        },
-        tier2b: {
-          value: "80ce67a7-fba9-482f-b7e0-9c0eb23425d4",
-          label: "Brian Harman"
-        },
-        tier3: {
-          value: "3abaad6d-ea04-49aa-b330-aa1b450c1b36",
-          label: "Sam Saunders"
-        },
-        tier4: {
-          value: "f572509d-7c6d-48b9-9c65-a20f6d2d492b",
-          label: "Sam Burns"
-        }
-      },
-      {
-        first_name: "Ally",
-        last_name: "Fowler",
-        tier1: {
-          value: "085c0b40-e456-4d46-b011-f992a4ee8a68",
-          label: "Adam Hadwin"
-        },
-        tier2b: {
-          value: "80ce67a7-fba9-482f-b7e0-9c0eb23425d4",
-          label: "Charlie Danielson"
-        },
-        tier4: {
-          value: "92544280-0438-4f43-a5f3-f3a21ea55157",
-          label: "Brian Harman"
-        },
-        tier2a: {
-          value: "3abaad6d-ea04-49aa-b330-aa1b450c1b36",
-          label: "Sam Saunders"
-        },
-        tier3: {
-          value: "16d8796c-7927-4d1b-b926-b2d906dbc64e",
-          label: "Robert Streb"
-        }
-      },
-      {
-        first_name: "Jon",
-        last_name: "Lacour",
-        tier1: {
-          value: "085c0b40-e456-4d46-b011-f992a4ee8a68",
-          label: "Adam Hadwin"
-        },
-        tier2b: {
-          value: "72b41f76-a9a1-4ff9-8364-b8a21129bd54",
-          label: "Scott Piercy"
-        },
-        tier4: {
-          value: "92544280-0438-4f43-a5f3-f3a21ea55157",
-          label: "Brian Harman"
-        },
-        tier2a: {
-          value: "4dc6e9c7-dd5b-4cf2-a7fe-b9c94c7a9110",
-          label: "Jason Dufner"
-        },
-        tier3: {
-          value: "f572509d-7c6d-48b9-9c65-a20f6d2d492b",
-          label: "Sam Burns"
-        }
-      },
-    ],
+    users: [],
     leaderboard: []
   };
 
   componentWillMount() {
-    console.log(this.props.tournament.id);
     this.state.isLoading = true;
-    fetch(`http://52.37.61.234:3004/leaderboard/${this.props.tournament.id}`)
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        this.state.leaderboard = data.leaderboard;
-        this.state.tournamentName = data.name;
-        console.log(this.state.leaderboard);
-        for (let i = 0; i < this.state.users.length; i++) {
-          console.log(this.state.users[i]);
-          this.state.users[i].tier1Score = this.state.leaderboard.filter(
-            obj => {
-              return obj.id === this.state.users[i].tier1.value;
+    fetch(`http://52.37.61.234:3004/user/userSelections`)
+      .then(res => res.json())
+      .then(userSelections => {
+        this.state.users = userSelections;
+        fetch(`http://52.37.61.234:3004/leaderboard/${this.props.tournament.id}`)
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+            this.state.leaderboard = data.leaderboard;
+            this.state.tournamentName = data.name;
+            for (let i = 0; i < this.state.users.length; i++) {
+              console.log(this.state.users[i]);
+              this.state.users[i].tier1Score = this.state.leaderboard.filter(
+                obj => {
+                  return obj.id === this.state.users[i].tier1_id;
+                }
+              );
+              this.state.users[i].tier2aScore = this.state.leaderboard.filter(
+                obj => {
+                  return obj.id === this.state.users[i].tier2a_id;
+                }
+              );
+              this.state.users[i].tier2bScore = this.state.leaderboard.filter(
+                obj => {
+                  return obj.id === this.state.users[i].tier2b_id;
+                }
+              );
+              this.state.users[i].tier3Score = this.state.leaderboard.filter(
+                obj => {
+                  return obj.id === this.state.users[i].tier3_id;
+                }
+              );
+              this.state.users[i].tier4Score = this.state.leaderboard.filter(
+                obj => {
+                  return obj.id === this.state.users[i].tier4_id;
+                }
+              );
             }
-          );
-          this.state.users[i].tier2aScore = this.state.leaderboard.filter(
-            obj => {
-              return obj.id === this.state.users[i].tier2a.value;
+            console.log(this.state.users);
+            for (let x = 0; x < this.state.users.length; x++) {
+              if (this.state.users[x].tier1Score.length > 0) {
+                if (this.state.users[x].tier1Score[0].rounds[0]) {
+                  this.state.users[x].thursdayTotal =
+                    this.state.users[x].tier1Score[0].rounds[0].score +
+                    this.state.users[x].tier2aScore[0].rounds[0].score +
+                    this.state.users[x].tier2bScore[0].rounds[0].score +
+                    this.state.users[x].tier3Score[0].rounds[0].score +
+                    this.state.users[x].tier4Score[0].rounds[0].score;
+                  this.state.users[x].total = this.state.users[x].thursdayTotal;
+                }
+                if (this.state.users[x].tier1Score[0].rounds[1]) {
+                  this.state.users[x].fridayTotal =
+                    this.state.users[x].tier1Score[0].rounds[1].score +
+                    this.state.users[x].tier2aScore[0].rounds[1].score +
+                    this.state.users[x].tier2bScore[0].rounds[1].score +
+                    this.state.users[x].tier3Score[0].rounds[1].score +
+                    this.state.users[x].tier4Score[0].rounds[1].score;
+                  this.state.users[x].total =
+                    this.state.users[x].total + this.state.users[x].fridayTotal;
+                }
+                if (this.state.users[x].tier1Score[0].rounds[2]) {
+                  this.state.users[x].saturdayTotal =
+                    this.state.users[x].tier1Score[0].rounds[2].score +
+                    this.state.users[x].tier2aScore[0].rounds[2].score +
+                    this.state.users[x].tier2bScore[0].rounds[2].score +
+                    this.state.users[x].tier3Score[0].rounds[2].score +
+                    this.state.users[x].tier4Score[0].rounds[2].score;
+                  this.state.users[x].total =
+                    this.state.users[x].total +
+                    this.state.users[x].saturdayTotal;
+                }
+                if (this.state.users[x].tier1Score[0].rounds[3]) {
+                  console.log(this.state.users[x]);
+                  this.state.users[x].sundayTotal =
+                    this.state.users[x].tier1Score[0].rounds[3].score +
+                    this.state.users[x].tier2aScore[0].rounds[3].score +
+                    this.state.users[x].tier2bScore[0].rounds[3].score +
+                    this.state.users[x].tier3Score[0].rounds[3].score +
+                    this.state.users[x].tier4Score[0].rounds[3].score;
+                  this.state.users[x].total =
+                    this.state.users[x].total + this.state.users[x].sundayTotal;
+                }
+              } else {
+                this.state.users[x].tier1Score.push({rounds: []});
+                this.state.users[x].tier2aScore.push({rounds: []});
+                this.state.users[x].tier2bScore.push({rounds: []});
+                this.state.users[x].tier3Score.push({rounds: []});
+                this.state.users[x].tier4Score.push({rounds: []});
+              }
             }
-          );
-          this.state.users[i].tier2bScore = this.state.leaderboard.filter(
-            obj => {
-              return obj.id === this.state.users[i].tier2b.value;
-            }
-          );
-          this.state.users[i].tier3Score = this.state.leaderboard.filter(
-            obj => {
-              return obj.id === this.state.users[i].tier3.value;
-            }
-          );
-          this.state.users[i].tier4Score = this.state.leaderboard.filter(
-            obj => {
-              return obj.id === this.state.users[i].tier4.value;
-            }
-          );
-        }
-        console.log(this.state.users);
-      }).then(res => {
-      for (let x = 0; x < this.state.users.length; x++) {
-        if (this.state.users[x].tier1Score[0].rounds[0]) {
-          this.state.users[x].thursdayTotal = this.state.users[x].tier1Score[0].rounds[0].score + this.state.users[x].tier2aScore[0].rounds[0].score + this.state.users[x].tier2bScore[0].rounds[0].score + this.state.users[x].tier3Score[0].rounds[0].score + this.state.users[x].tier4Score[0].rounds[0].score;
-          this.state.users[x].total = this.state.users[x].thursdayTotal;
-        }
-        if (this.state.users[x].tier1Score[0].rounds[1]) {
-          this.state.users[x].fridayTotal = this.state.users[x].tier1Score[0].rounds[1].score + this.state.users[x].tier2aScore[0].rounds[1].score + this.state.users[x].tier2bScore[0].rounds[1].score + this.state.users[x].tier3Score[0].rounds[1].score + this.state.users[x].tier4Score[0].rounds[1].score;
-          this.state.users[x].total = this.state.users[x].total + this.state.users[x].fridayTotal;
-        }
-        if (this.state.users[x].tier1Score[0].rounds[2]) {
-          this.state.users[x].saturdayTotal = this.state.users[x].tier1Score[0].rounds[2].score + this.state.users[x].tier2aScore[0].rounds[2].score + this.state.users[x].tier2bScore[0].rounds[2].score + this.state.users[x].tier3Score[0].rounds[2].score + this.state.users[x].tier4Score[0].rounds[2].score;
-          this.state.users[x].total = this.state.users[x].total + this.state.users[x].saturdayTotal;
-        }
-        if (this.state.users[x].tier1Score[0].rounds[3]) {
-          console.log(this.state.users[x]);
-          this.state.users[x].sundayTotal = this.state.users[x].tier1Score[0].rounds[3].score + this.state.users[x].tier2aScore[0].rounds[3].score + this.state.users[x].tier2bScore[0].rounds[3].score + this.state.users[x].tier3Score[0].rounds[3].score + this.state.users[x].tier4Score[0].rounds[3].score;
-          this.state.users[x].total = this.state.users[x].total + this.state.users[x].sundayTotal;
-        }
-      }
-    }).then(result => {
-      // this.state.users.sort(function(a, b) {return a.total - b.total})
-      this.state.isLoading = false;
-      this.forceUpdate();
-    })
+            this.state.isLoading = false;
+            this.forceUpdate();
+          });
+      })
+      .then(result => {
+        // this.state.users.sort(function(a, b) {return a.total - b.total})
+      });
   }
 
   render() {
@@ -222,7 +160,7 @@ class Leaderboard extends Component {
                         </p>
                       </td>
                       <td>
-                        <p>{user.tier1.label}</p>
+                        <p>{user.tier1_name}</p>
                       </td>
                       <td>
                         <p>
@@ -253,7 +191,7 @@ class Leaderboard extends Component {
                         </p>
                       </td>
                       <td>
-                        <p>{user.tier2a.label}</p>
+                        <p>{user.tier2a_name}</p>
                       </td>
                       <td>
                         <p>
@@ -284,7 +222,7 @@ class Leaderboard extends Component {
                         </p>
                       </td>
                       <td>
-                        <p>{user.tier2b.label}</p>
+                        <p>{user.tier2b_name}</p>
                       </td>
                       <td>
                         <p>
@@ -315,7 +253,7 @@ class Leaderboard extends Component {
                         </p>
                       </td>
                       <td>
-                        <p>{user.tier3.label}</p>
+                        <p>{user.tier3_name}</p>
                       </td>
                       <td>
                         <p>
@@ -346,7 +284,7 @@ class Leaderboard extends Component {
                         </p>
                       </td>
                       <td>
-                        <p>{user.tier4.label}</p>
+                        <p>{user.tier4_name}</p>
                       </td>
                       <td>
                         <p>
@@ -377,29 +315,19 @@ class Leaderboard extends Component {
                         </p>
                       </td>
                       <td>
-                        <p>
-                          {user.thursdayTotal ? user.thursdayTotal : null}
-                        </p>
+                        <p>{user.thursdayTotal ? user.thursdayTotal : null}</p>
                       </td>
                       <td>
-                        <p>
-                          {user.fridayTotal ? user.fridayTotal : null}
-                        </p>
+                        <p>{user.fridayTotal ? user.fridayTotal : null}</p>
                       </td>
                       <td>
-                        <p>
-                          {user.saturdayTotal ? user.saturdayTotal : null}
-                        </p>
+                        <p>{user.saturdayTotal ? user.saturdayTotal : null}</p>
                       </td>
                       <td>
-                        <p>
-                          {user.sundayTotal ? user.sundayTotal : null}
-                        </p>
+                        <p>{user.sundayTotal ? user.sundayTotal : null}</p>
                       </td>
                       <td>
-                        <p>
-                          {user.total}
-                        </p>
+                        <p>{user.total}</p>
                       </td>
                     </tr>
                   );

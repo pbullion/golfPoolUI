@@ -1,18 +1,25 @@
 import React, { Component } from "react";
-import { Button, Container } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
-import * as tournaments from "./tournaments.js";
+import * as season from "./tournaments.js";
 
 class Schedule extends Component {
   state = {
-      tournaments: tournaments.tournaments.tournaments
+    tournaments: season.schedule.tournaments
   };
 
-  handleClick = tournament => {
+  handleClickSignUp = tournament => {
     console.log(tournament);
     this.props.selectTournament(tournament);
     console.log(this.props.tournament);
     this.props.history.push("/selection-page");
+  };
+
+  handleClickLeaderboard = tournament => {
+    console.log(tournament);
+    this.props.selectTournament(tournament);
+    console.log(this.props.tournament);
+    this.props.history.push("/leaderboard");
   };
 
   componentWillMount() {
@@ -22,7 +29,7 @@ class Schedule extends Component {
     //     console.log(data);
     //     this.setState({ tournaments: data.tournaments });
     //   });
-      console.log(this.state.tournaments)
+    console.log(this.state.tournaments);
   }
 
   render() {
@@ -36,16 +43,30 @@ class Schedule extends Component {
         }}
       >
         <h1>2019 PGA TOUR SCHEDULE</h1>
-        {this.state.tournaments && this.state.tournaments.map(tournament => {
-          return (
-            <p
-              key={tournament.id}
-              onClick={() => this.handleClick(tournament)}
-            >
-              {tournament.name}
-            </p>
-          );
-        })}
+        {this.state.tournaments &&
+          this.state.tournaments.map(tournament => {
+            return (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                    marginBottom: 25
+                }}
+              >
+                <h3
+                  key={tournament.id}
+                >
+                  {tournament.name}
+                </h3>
+                <div>
+                  <Button style={{marginRight: 15}} variant="primary" onClick={() => this.handleClickSignUp(tournament)}>Sign Up</Button>
+                  <Button variant="success" onClick={() => this.handleClickLeaderboard(tournament)}>Leaderboard</Button>
+                </div>
+              </div>
+            );
+          })}
       </Container>
     );
   }
