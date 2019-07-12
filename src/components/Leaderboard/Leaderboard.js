@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Container } from "react-bootstrap";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
 
 class Leaderboard extends Component {
   state = {
@@ -145,6 +147,7 @@ class Leaderboard extends Component {
               <th scope="col">SAT</th>
               <th scope="col">SUN</th>
               <th scope="col">TOTAL</th>
+              <th scope="col">Paid</th>
             </tr>
           </thead>
           <tbody>
@@ -326,6 +329,10 @@ class Leaderboard extends Component {
                       </td>
                       <td>
                         <p>{user.total}</p>
+                      </td>
+                      <td>
+                        <p>{user.paid ? <FontAwesomeIcon icon={faCheck} />
+                            : null}</p>
                       </td>
                     </tr>
                   );
