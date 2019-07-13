@@ -13,12 +13,12 @@ class Leaderboard extends Component {
 
   componentWillMount() {
     this.state.isLoading = true;
-    fetch(`http://34.217.60.211:3004/user/userSelections`)
+    fetch(`http://18.237.192.82:3004/user/userSelections`)
       .then(res => res.json())
       .then(userSelections => {
         this.state.users = userSelections;
         fetch(
-          `http://34.217.60.211:3004/leaderboard/${this.props.tournament.id}`
+          `http://18.237.192.82:3004/leaderboard/${this.props.tournament.id}`
         )
           .then(response => response.json())
           .then(data => {

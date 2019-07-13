@@ -41,7 +41,7 @@ class Schedule extends Component {
   }
 
   componentWillMount() {
-    // fetch("http://52.37.61.234:3004/schedule")
+    // fetch("http://18.237.192.82:3004/schedule")
     //   .then(response => response.json())
     //   .then(data => {
     //     console.log(data);
