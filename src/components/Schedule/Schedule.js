@@ -3,6 +3,7 @@ import { Container, Button } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 import * as season from "./tournaments.js";
 import "./Schedule.css";
+import * as moment from 'moment';
 
 class Schedule extends Component {
   state = {
@@ -23,6 +24,22 @@ class Schedule extends Component {
     this.props.history.push("/leaderboard");
   };
 
+  isSignUpDisabled = (start, end) => {
+    if (moment().isAfter(start) && moment().isBefore(end)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  isLeaderboardDisabled = (signUpStart, start) => {
+    if (moment().isAfter(signUpStart)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   componentWillMount() {
     // fetch("http://52.37.61.234:3004/schedule")
     //   .then(response => response.json())
@@ -41,12 +58,14 @@ class Schedule extends Component {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          textAlign: "center",
+          textAlign: "center"
         }}
       >
-        <h1>2019 PGA TOUR SCHEDULE</h1>
+        <div className="background"></div>
+        <h1>2019 Remaining PGA TOUR SCHEDULE</h1>
         <h3>Rules</h3>
-        <h4>$25 Entry </h4>
+        <h4>$25 Entry for Majors</h4>
+        <h4>$10 Entry for normal events</h4>
         <ul>
           <li>
             Pick one golfer from rankings 1-10 (Teir 1), two from 11-30 (Tier
@@ -73,7 +92,11 @@ class Schedule extends Component {
             BONUS **If you pick the Champion, you will receive a 3-shot
             reduction upon final scoring**
           </li>
-          <li><a href="https://venmo.com/code?user_id=1345709991264256703">Venmo: jonathan-lacour, 713-376-0030</a></li>
+          <li>
+            <a href="https://venmo.com/code?user_id=1345709991264256703">
+              Venmo: jonathan-lacour, 713-376-0030
+            </a>
+          </li>
         </ul>
         {this.state.tournaments &&
           this.state.tournaments.map(tournament => {
@@ -86,18 +109,23 @@ class Schedule extends Component {
                   justifyContent: "center",
                   marginBottom: 25
                 }}
+                key={tournament.id}
               >
-                <h3 key={tournament.id}>{tournament.name}</h3>
+                <h2>{tournament.name}</h2>
+                <h4>Sign Up Starts: {tournament.sign_up_start}</h4>
+                <h4>Start Date: {tournament.start_date}</h4>
                 <div>
                   <Button
                     style={{ marginRight: 15 }}
                     variant="primary"
+                    disabled={this.isSignUpDisabled(tournament.sign_up_start, tournament.sign_up_end)}
                     onClick={() => this.handleClickSignUp(tournament)}
                   >
                     Sign Up
                   </Button>
                   <Button
                     variant="success"
+                    disabled={this.isLeaderboardDisabled(tournament.sign_up_start, tournament.start_date)}
                     onClick={() => this.handleClickLeaderboard(tournament)}
                   >
                     Leaderboard
