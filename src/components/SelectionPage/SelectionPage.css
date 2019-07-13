@@ -1,0 +1,10 @@
+.background {
+  background-image: url("../../media/rp.jpg");
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1000;
+  opacity: 0.6;
+}

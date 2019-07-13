@@ -3,6 +3,7 @@ import { Button, Container } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
+import "./SelectionPage.css";
 
 class SelectionPage extends Component {
   state = {
@@ -25,29 +26,54 @@ class SelectionPage extends Component {
     let first_name = event.target.elements.formFirstName.value;
     let last_name = event.target.elements.formLastName.value;
     let tournament_id = this.props.tournament.id;
-    let tier1 = this.state.golfers.find(golfer => golfer.id === event.target.elements.formTier1Player.value);
-    let tier2a = this.state.golfers.find(golfer => golfer.id === event.target.elements.formTier2Player[0].value);
-    let tier2b = this.state.golfers.find(golfer => golfer.id === event.target.elements.formTier2Player[1].value);
-    let tier3 = this.state.golfers.find(golfer => golfer.id === event.target.elements.formTier3Player.value);
-    let tier4 = this.state.golfers.find(golfer => golfer.id === event.target.elements.formTier4Player.value);
+    let tier1 = this.state.golfers.find(
+      golfer => golfer.id === event.target.elements.formTier1Player.value
+    );
+    let tier2a = this.state.golfers.find(
+      golfer => golfer.id === event.target.elements.formTier2Player[0].value
+    );
+    let tier2b = this.state.golfers.find(
+      golfer => golfer.id === event.target.elements.formTier2Player[1].value
+    );
+    let tier3 = this.state.golfers.find(
+      golfer => golfer.id === event.target.elements.formTier3Player.value
+    );
+    let tier4 = this.state.golfers.find(
+      golfer => golfer.id === event.target.elements.formTier4Player.value
+    );
 
-    axios.post(`http://18.237.192.82:3004/user/userSelections`, {
-      first_name, last_name, email, tournament_id, tier1, tier2a, tier2b, tier3, tier4
-    }, {
-      headers: {
-        'content-type': 'application/json'
-      }
-    })
-        .then(function (response) {
-          self.props.history.push("/leaderboard");
-        })
-        .catch(function (error) {
-          console.log('error', error)
-        })
+    axios
+      .post(
+        `http://18.237.192.82:3004/user/userSelections`,
+        {
+          first_name,
+          last_name,
+          email,
+          tournament_id,
+          tier1,
+          tier2a,
+          tier2b,
+          tier3,
+          tier4
+        },
+        {
+          headers: {
+            "content-type": "application/json"
+          }
+        }
+      )
+      .then(function(response) {
+        self.props.history.push("/leaderboard");
+      })
+      .catch(function(error) {
+        console.log("error", error);
+      });
   };
 
   componentWillMount() {
-    fetch(`http://18.237.192.82:3004/tournament-field/${this.props.tournament.id}`)
+    fetch(
+      `http://18.237.192.82:3004/tournament-field/${this.props.tournament.id}`
+    )
       .then(response => response.json())
       .then(data => {
         console.log("********************");
@@ -95,6 +121,7 @@ class SelectionPage extends Component {
           textAlign: "center"
         }}
       >
+        <div className="background"></div>
         <h1>{this.props.tournament.name && this.props.tournament.name}</h1>
         <ul>
           <li>
@@ -122,7 +149,11 @@ class SelectionPage extends Component {
             BONUS **If you pick the Champion, you will receive a 3-shot
             reduction upon final scoring**
           </li>
-          <li><a href="https://venmo.com/code?user_id=1761698973220865011">Venmo: jonathan-lacour, 713-376-0030</a></li>
+          <li>
+            <a href="https://venmo.com/code?user_id=1761698973220865011">
+              Venmo: jonathan-lacour, 713-376-0030
+            </a>
+          </li>
         </ul>
         <Form onSubmit={e => this.handleSubmit(e)}>
           <Form.Group controlId="formBasicEmail">
