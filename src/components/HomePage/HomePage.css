@@ -1,0 +1,19 @@
+ul {
+    text-align: left;
+    padding: 0px 0px 0px 20px;
+}
+
+form {
+    width: 300px;
+}
+
+.background {
+    background-image: url("../../media/rp.jpg");
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1000;
+    opacity: .6;
+}
