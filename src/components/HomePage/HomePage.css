@@ -1,19 +1,26 @@
-ul {
-    text-align: left;
-    padding: 0px 0px 0px 20px;
+.my-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 600px;
+  padding: 75px;
+  line-height: 1.5;
+  font-size: 1.5em;
+  color: white;
+    background-color: white;
 }
 
-form {
-    width: 300px;
+.slide-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.background {
-    background-image: url("../../media/rp.jpg");
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1000;
-    opacity: .6;
+.boxes {
+    border: 1px solid red;
+    height: 350px;
+    width: 250px;
+    border-radius: 15px;
 }
