@@ -25,7 +25,7 @@ class Schedule extends Component {
   };
 
   isSignUpDisabled = (start, end) => {
-    if (moment().isAfter(start) && moment().isBefore(end)) {
+    if (moment().utcOffset("-05:00").isAfter(start) && moment().utcOffset("-05:00").isBefore(end)) {
       return false;
     } else {
       return true;
@@ -33,7 +33,7 @@ class Schedule extends Component {
   }
 
   isLeaderboardDisabled = (signUpStart, start) => {
-    if (moment().isAfter(start)) {
+    if (moment().utcOffset("-05:00").isAfter(start)) {
       return false;
     } else {
       return true;
