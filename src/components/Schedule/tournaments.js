@@ -18,8 +18,8 @@ export const schedule= {
       currency: "USD",
       points: 600,
       start_date: "2019-07-18",
-      sign_up_start: "2019-07-11",
-      sign_up_end: "2019-07-17",
+      sign_up_start: "2019-07-16",
+      sign_up_end: "2019-07-18",
       end_date: "2019-07-21",
       course_timezone: "Europe/London",
       venue: {
