@@ -16,12 +16,6 @@ class SelectionPage extends Component {
   handleSubmit = event => {
     let self = this;
     event.preventDefault();
-    console.log(event.target.elements.formTier1Player.value);
-    console.log(event.target.elements.formTier2Player);
-    console.log(event.target.elements.formTier2Player[0].value);
-    console.log(event.target.elements.formTier2Player[1].value);
-    console.log(event.target.elements.formTier3Player.value);
-    console.log(event.target.elements.formTier4Player.value);
     let email = event.target.elements.formBasicEmail.value;
     let first_name = event.target.elements.formFirstName.value;
     let last_name = event.target.elements.formLastName.value;
@@ -229,6 +223,32 @@ class SelectionPage extends Component {
             Submit
           </Button>
         </Form>
+        <div>
+          <h2>Tier 1</h2>
+          <ul>
+            {this.state.tierOne.map(player => {
+              return <li key={player.value}>{player.label}</li>;
+            })}
+          </ul>
+          <h2>Tier 2</h2>
+          <ul>
+            {this.state.tierTwo.map(player => {
+              return <li key={player.value}>{player.label}</li>;
+            })}
+          </ul>
+          <h2>Tier 3</h2>
+          <ul>
+            {this.state.tierThree.map(player => {
+              return <li key={player.value}>{player.label}</li>;
+            })}
+          </ul>
+          <h2>Tier 4</h2>
+          <ul>
+            {this.state.tierFour.map(player => {
+              return <li key={player.value}>{player.label}</li>;
+            })}
+          </ul>
+        </div>
       </Container>
     );
   }

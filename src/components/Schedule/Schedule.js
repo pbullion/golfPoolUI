@@ -65,7 +65,6 @@ class Schedule extends Component {
         <h1>2019 Remaining PGA TOUR SCHEDULE</h1>
         <h3>Rules</h3>
         <h4>$25 Entry for Majors</h4>
-        <h4>$10 Entry for normal events</h4>
         <ul>
           <li>
             Pick one golfer from rankings 1-10 (Teir 1), two from 11-30 (Tier
