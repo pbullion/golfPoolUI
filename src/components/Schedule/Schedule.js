@@ -33,7 +33,7 @@ class Schedule extends Component {
   }
 
   isLeaderboardDisabled = (signUpStart, start) => {
-    if (moment().isAfter(signUpStart)) {
+    if (moment().isAfter(start)) {
       return false;
     } else {
       return true;
