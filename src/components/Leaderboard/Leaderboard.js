@@ -18,7 +18,7 @@ class Leaderboard extends Component {
       .then(userSelections => {
         this.state.users = userSelections;
         fetch(
-          `http://18.237.192.82:3004/leaderboard/${this.props.tournament.id}`
+          `http://18.237.192.82:3004/leaderboard/`
         )
           .then(response => response.json())
           .then(data => {
