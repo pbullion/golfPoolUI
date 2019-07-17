@@ -57,7 +57,7 @@ class SelectionPage extends Component {
         }
       )
       .then(function(response) {
-        self.props.history.push("/leaderboard");
+        self.props.history.push("/");
       })
       .catch(function(error) {
         console.log("error", error);
