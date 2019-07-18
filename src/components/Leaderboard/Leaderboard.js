@@ -116,7 +116,7 @@ class Leaderboard extends Component {
     return (
       <Container fluid>
         <h1>{this.state.tournamentName}</h1>
-        <h2>UPDATED AT: 9:45 am</h2>
+        <h2>UPDATED AT: 11:40 am</h2>
         <table className="table">
           <thead>
             <tr>
