@@ -121,7 +121,6 @@ class Leaderboard extends Component {
           <thead>
             <tr>
               <th scope="col">Name</th>
-              <th scope="col">Paid</th>
               <th scope="col">TOTAL</th>
               <th scope="col">THU</th>
               <th scope="col">FRI</th>
@@ -163,14 +162,6 @@ class Leaderboard extends Component {
                         <p>
                           {user.first_name} {user.last_name}
                         </p>
-                      </td>
-                      <td id="fontAwesome">
-                        {user.paid ? (
-                          <FontAwesomeIcon
-                            style={{ textAlign: "center" }}
-                            icon={faCheck}
-                          />
-                        ) : null}
                       </td>
                       <td>
                         <p>{user.total}</p>
