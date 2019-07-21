@@ -47,11 +47,11 @@ class Leaderboard extends Component {
                   return obj.id === this.state.users[i].tier3_id;
                 }
               );
-              this.state.users[i].tier4Score = this.state.leaderboard.filter(
+              {this.state.users[i].tier4Score ? this.state.users[i].tier4Score = this.state.leaderboard.filter(
                 obj => {
                   return obj.id === this.state.users[i].tier4_id;
                 }
-              );
+              ) : null };
             }
             console.log(this.state.users);
             for (let x = 0; x < this.state.users.length; x++) {
