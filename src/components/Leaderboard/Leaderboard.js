@@ -116,7 +116,7 @@ class Leaderboard extends Component {
     return (
       <Container fluid>
         <h1>{this.state.tournamentName}</h1>
-        <h2>UPDATED AT: 11:00 AM Central SUNDAY</h2>
+        <h2>FINAL</h2>
         <table className="table">
           <thead>
             <tr>
@@ -176,7 +176,7 @@ class Leaderboard extends Component {
                         <p>{user.saturdayTotal ? user.saturdayTotal : "0"}</p>
                       </td>
                       <td>
-                        <p>{user.sundayTotal ? user.sundayTotal : null}</p>
+                        <p>{user.sundayTotal ? user.sundayTotal : "0"}</p>
                       </td>
                       <td>
                         <p>{user.tier1_name}</p>
