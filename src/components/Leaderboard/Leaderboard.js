@@ -167,13 +167,13 @@ class Leaderboard extends Component {
                         <p>{user.total}</p>
                       </td>
                       <td>
-                        <p>{user.thursdayTotal ? user.thursdayTotal : null}</p>
+                        <p>{user.thursdayTotal ? user.thursdayTotal : "0"}</p>
                       </td>
                       <td>
-                        <p>{user.fridayTotal ? user.fridayTotal : null}</p>
+                        <p>{user.fridayTotal ? user.fridayTotal : "0"}</p>
                       </td>
                       <td>
-                        <p>{user.saturdayTotal ? user.saturdayTotal : null}</p>
+                        <p>{user.saturdayTotal ? user.saturdayTotal : "0"}</p>
                       </td>
                       <td>
                         <p>{user.sundayTotal ? user.sundayTotal : null}</p>
