@@ -13,12 +13,12 @@ class Leaderboard extends Component {
 
   componentWillMount() {
     this.state.isLoading = true;
-    fetch(`http://18.237.192.82:3004/user/userSelections`)
+    fetch(`http://localhost:3004/user/userSelections`)
       .then(res => res.json())
       .then(userSelections => {
         this.state.users = userSelections;
         fetch(
-          `http://18.237.192.82:3004/leaderboard/`
+          `http://localhost:3004/leaderboard/`
         )
           .then(response => response.json())
           .then(data => {
@@ -47,11 +47,11 @@ class Leaderboard extends Component {
                   return obj.id === this.state.users[i].tier3_id;
                 }
               );
-              {this.state.users[i].tier4Score ? this.state.users[i].tier4Score = this.state.leaderboard.filter(
+              this.state.users[i].tier4Score = this.state.leaderboard.filter(
                 obj => {
                   return obj.id === this.state.users[i].tier4_id;
                 }
-              ) : null };
+              )
             }
             console.log(this.state.users);
             for (let x = 0; x < this.state.users.length; x++) {
@@ -116,7 +116,7 @@ class Leaderboard extends Component {
     return (
       <Container fluid>
         <h1>{this.state.tournamentName}</h1>
-        <h2>UPDATED AT: 5:00 PM Central</h2>
+        <h2>UPDATED AT: 11:00 AM Central SUNDAY</h2>
         <table className="table">
           <thead>
             <tr>
