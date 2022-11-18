@@ -18,7 +18,7 @@
     "react-select": "^3.0.4"
   },
   "devDependencies": {
-    "react-scripts": "2.1.5"
+    "react-scripts": "5.0.1"
   },
   "scripts": {
     "start": "PORT=3007 react-scripts start",
